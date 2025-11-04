@@ -1,0 +1,115 @@
+name: eyewear_shop
+description: A new Flutter project for eyewear shopping app.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  provider: ^6.1.1
+  badges: ^3.1.2
+  image_picker: ^1.1.1 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/load.png
+    - assets/images/bg1.png
+    - assets/images/logo.png
+    - assets/images/logo-white.png
+    - assets/images/logo-dark.png
+
+    - assets/images/onboarding.png
+    - assets/images/signin.png
+    - assets/images/google.png
+    - assets/images/apple.png
+    - assets/images/create.png
+    - assets/images/forgot.png
+    - assets/images/reset.png
+    - assets/images/verify.png
+    - assets/images/banner.png
+
+    - assets/images/product1.png
+    - assets/images/product2.png
+    - assets/images/product3.png
+    - assets/images/product4.png
+    - assets/images/product5.png
+    - assets/images/product6.png
+    - assets/images/product7.png
+    - assets/images/product8.png
+    - assets/images/product9.png
+
+    - assets/images/category/category1.png
+    - assets/images/category/category2.png
+    - assets/images/category/category3.png
+    
+    - assets/images/products1/products1.png
+    - assets/images/products1/products2.png
+    - assets/images/products1/products3.png
+    - assets/images/products1/products4.png
+    - assets/images/products1/products5.png
+    - assets/images/products1/products6.png
+    
+    - assets/images/flag/india.png
+    - assets/images/flag/united_states.png
+    - assets/images/flag/germany.png
+    - assets/images/flag/spain.png
+    - assets/images/flag/italy.png
+
+  fonts:
+    - family: TomatoGrotesk
+      fonts:
+        - asset: assets/fonts/TomatoGrotesk-Thin.otf
+          weight: 100
+        - asset: assets/fonts/TomatoGrotesk-ThinSlanted.otf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/TomatoGrotesk-ExtraLight.otf
+          weight: 200
+        - asset: assets/fonts/TomatoGrotesk-ExtraLightSlanted.otf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/TomatoGrotesk-Light.otf
+          weight: 300
+        - asset: assets/fonts/TomatoGrotesk-LightSlanted.otf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/TomatoGrotesk-Regular.otf
+          weight: 400
+        - asset: assets/fonts/TomatoGrotesk-Medium.otf
+          weight: 500
+        - asset: assets/fonts/TomatoGrotesk-MediumSlanted.otf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/TomatoGrotesk-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/TomatoGrotesk-SemiBoldSlanted.otf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/TomatoGrotesk-Bold.otf
+          weight: 700
+        - asset: assets/fonts/TomatoGrotesk-BoldSlanted.otf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/TomatoGrotesk-ExtraBold.otf
+          weight: 800
+        - asset: assets/fonts/TomatoGrotesk-ExtraBoldSlanted.otf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/TomatoGrotesk-Black.otf
+          weight: 900
+        - asset: assets/fonts/TomatoGrotesk-BlackSlanted.otf
+          weight: 900
+          style: italic
