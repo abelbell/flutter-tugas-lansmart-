@@ -36,13 +36,11 @@ class _SplashScreenState extends State<SplashScreen>
       CurvedAnimation(parent: _logoCtrl, curve: Curves.easeIn),
     );
 
-    // Jalankan animasi tanpa frame kosong
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _logoCtrl.forward();
       _startLetterAnimation();
     });
 
-    // Setelah semua animasi selesai → langsung ke Onboarding
     Future.delayed(const Duration(milliseconds: 1800), () {
       if (!mounted) return;
       Navigator.of(context).pushReplacement(

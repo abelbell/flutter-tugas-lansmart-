@@ -1,6 +1,10 @@
+// lib/models/edit_profile_page.dart
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -16,6 +20,62 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController locationController = TextEditingController();
 
   File? _profileImage;
+  bool isLoading = true;
+
+  final user = FirebaseAuth.instance.currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  // ---------------------------------
+  // 🔹 Ambil Data User dari Firestore
+  // ---------------------------------
+  Future<void> _loadUserData() async {
+    if (user == null) return;
+
+    DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get();
+
+    if (userDoc.exists) {
+      nameController.text = userDoc["name"] ?? "";
+      phoneController.text = userDoc["phone"] ?? "";
+      emailController.text = userDoc["email"] ?? "";
+      locationController.text = userDoc["location"] ?? "";
+    }
+
+    setState(() => isLoading = false);
+  }
+
+  // ----------------------------
+  // 🔹 Update profil ke Firestore
+  // ----------------------------
+  Future<void> _updateProfile() async {
+    if (user == null) return;
+
+    await FirebaseFirestore.instance.collection("users").doc(user!.uid).update({
+      "name": nameController.text.trim(),
+      "phone": phoneController.text.trim(),
+      "email": emailController.text.trim(),
+      "location": locationController.text.trim(),
+    });
+
+    // Kalau kamu mau upload foto profil, nanti aku sambungkan ke Firebase Storage juga
+    // Sekarang sementara simpan teks dulu
+
+    Navigator.pop(context);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Profile updated successfully"),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
@@ -29,6 +89,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -89,13 +155,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
               _buildLabelTextField('Email', emailController),
               _buildLabelTextField('Location', locationController),
 
-              const SizedBox(height: 80), // beri jarak agar tidak tertutup tombol
+              const SizedBox(height: 80),
             ],
           ),
         ),
       ),
 
-      // Tombol Update Profile di bawah layar
+      // Tombol Update Profile
       bottomNavigationBar: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(12),
@@ -109,15 +175,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              onPressed: () {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Profile updated successfully'),
-                    behavior: SnackBarBehavior.floating,
-                  ),
-                );
-              },
+              onPressed: _updateProfile,
               child: const Text(
                 'Update Profile',
                 style: TextStyle(
@@ -133,7 +191,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  // TextField dengan label di atas
   Widget _buildLabelTextField(String label, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
@@ -151,7 +208,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
           TextField(
             controller: controller,
             decoration: InputDecoration(
-              hintText: '',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
               ),

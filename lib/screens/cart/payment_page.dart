@@ -1,9 +1,8 @@
 // lib/screens/cart/payment_page.dart
 import 'package:flutter/material.dart';
-import 'widgets/credit_card_widget.dart'; // BENAR: dari folder yang sama
-import '../../models/credit_card_model.dart'; // Import model
+import 'widgets/credit_card_widget.dart';
+import '../../models/credit_card_model.dart'; 
 
-// ====== CREDIT CARD WIDGET ======
 class CreditCardWidget extends StatelessWidget {
   final String cardNumber;
   final String cardHolder;

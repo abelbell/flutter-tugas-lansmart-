@@ -1,10 +1,6 @@
 // lib/screens/pages/pages_page.dart
 import 'package:flutter/material.dart';
 
-// ========================================
-// TEMPLATE HALAMAN SEDERHANA
-// ========================================
-
 class SimplePage extends StatelessWidget {
   final String title;
   
@@ -211,9 +207,6 @@ class Error404Page extends StatelessWidget {
   Widget build(BuildContext context) => const SimplePage(title: 'Error - 404');
 }
 
-// ========================================
-// PAGES PAGE (MAIN)
-// ========================================
 
 class PagesPage extends StatelessWidget {
   const PagesPage({Key? key}) : super(key: key);

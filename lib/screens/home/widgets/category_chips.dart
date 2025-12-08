@@ -17,6 +17,7 @@ class CategoryChips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      // Reduced overall container height so chips appear thin (not vertically large)
       height: 40,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class SavedCardsPage extends StatefulWidget {
-  // 🔥 const dihapus biar gak error di ProfilePage
   SavedCardsPage({Key? key}) : super(key: key);
 
   @override

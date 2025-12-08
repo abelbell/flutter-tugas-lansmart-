@@ -141,10 +141,28 @@ class _ProductListScreenState extends State<ProductListScreen> {
               separatorBuilder: (_, __) => const SizedBox(width: 10),
               itemBuilder: (context, i) {
                 final isSelected = i == _selectedFilter;
-                return LensChip(
-                  label: _filters[i],
-                  selected: isSelected,
+                // Use a page-local rounded-rectangle chip to match the design
+                return GestureDetector(
                   onTap: () => setState(() => _selectedFilter = i),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: isSelected ? const Color(0xFFFFD794) : Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: isSelected ? const Color(0xFFFFD794) : Colors.grey.shade300,
+                      ),
+                    ),
+                    child: Text(
+                      _filters[i],
+                      style: const TextStyle(
+                        fontFamily: 'TomatoGrotesk',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
@@ -166,7 +184,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
         crossAxisCount: 2,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
-        childAspectRatio: 0.68, // Card lebih panjang ke bawah untuk menampung semua konten
+        // Slightly taller cards to match the design proportions
+        childAspectRatio: 0.85,
       ),
       itemCount: products.length,
       itemBuilder: (ctx, i) => _buildCard(products[i], i),
@@ -175,7 +194,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   Widget _buildList() {
     return ListView.builder(
-      padding: const EdgeInsets.all(8),
+      // Add bottom padding to account for the bottomNavigationBar so
+      // list content isn't obscured or causes the Column to overflow.
+      padding: const EdgeInsets.fromLTRB(8, 8, 8, 65),
       itemCount: products.length,
       itemBuilder: (ctx, i) {
         final p = products[i];
@@ -206,14 +227,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     topLeft: Radius.circular(12),
                     bottomLeft: Radius.circular(12),
                   ),
-                  child: Container(
-                    width: 120,
-                    color: const Color(0xFFF8F8F8),
+          child: Container(
+            width: 110,
+            // Use white so the product image sits on the card background
+            color: Colors.white,
                     child: Column(
                       children: [
                         // Image area
                         Container(
-                          height: 120,
+                          height: 100,
                           alignment: Alignment.center,
                           child: Stack(
                             children: [
@@ -251,15 +273,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
                             ],
                           ),
                         ),
-                        // Add To Cart button
+                        // Add To Cart button (smaller pill to match design)
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(6, 0, 6, 8),
+                          padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                           child: Container(
                             width: double.infinity,
-                            height: 32,
+                            height: 30,
                             decoration: BoxDecoration(
-                              color: Colors.grey.shade300,
-                              borderRadius: BorderRadius.circular(6),
+                              color: const Color(0xFFFFD794),
+                              borderRadius: BorderRadius.circular(16),
                             ),
                             child: TextButton(
                               onPressed: () {},
@@ -268,7 +290,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                 minimumSize: Size.zero,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6),
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
                               ),
                               child: const Text(
@@ -706,7 +728,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       child: Container(
                         height: 50,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFFA500),
+                          color: const Color(0xFFFFD794),
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: TextButton(
@@ -744,10 +766,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFFFFA500) : Colors.white,
+          color: isSelected ? const Color(0xFFFFD794) : Colors.white,
           borderRadius: BorderRadius.circular(25),
           border: Border.all(
-            color: isSelected ? const Color(0xFFFFA500) : Colors.grey.shade300,
+            color: isSelected ? const Color(0xFFFFD794) : Colors.grey.shade300,
           ),
         ),
         child: Text(
@@ -810,10 +832,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFFFFA500) : Colors.white,
+                  color: isSelected ? const Color(0xFFFFD794) : Colors.white,
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: isSelected ? const Color(0xFFFFA500) : Colors.grey.shade300,
+                    color: isSelected ? const Color(0xFFFFD794) : Colors.grey.shade300,
                   ),
                 ),
                 child: Text(
@@ -857,7 +879,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
             Stack(
               children: [
                 Container(
-                  height: 140,
+                  height: 120,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -865,7 +887,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   ),
                   child: Center(
                     child: Padding(
-                      padding: const EdgeInsets.all(20),
+                      // Reduce padding so the product image appears larger
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       child: Image.asset(
                         p['image'],
                         fit: BoxFit.contain,

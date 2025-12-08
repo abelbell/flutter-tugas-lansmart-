@@ -1,10 +1,10 @@
+// lib/models/theme_provider.dart
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
   bool _isDark = false;
   bool get isDark => _isDark;
 
-  // getter untuk ThemeMode
   ThemeMode get themeMode => _isDark ? ThemeMode.dark : ThemeMode.light;
 
   // Tema terang

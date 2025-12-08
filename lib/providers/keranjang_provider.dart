@@ -1,7 +1,8 @@
+// lib/models/keranjang_model.dart
 import 'package:flutter/foundation.dart';
 
 class KeranjangProvider extends ChangeNotifier {
-  int _jumlah = 14; // Dari badge di HTML
+  int _jumlah = 14;
 
   int get jumlah => _jumlah;
 

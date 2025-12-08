@@ -8,15 +8,14 @@ class TrackOrderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // PERBAIKAN: Sesuaikan dengan Product model
     final Product product = Product(
       id: '1',
-      name: 'Silver Purple Full Rim',       // Ganti title → name
-      price: 1100,                          // int, bukan double
-      imageUrl: 'assets/images/product2.png', // Ganti image → imageUrl
+      name: 'Silver Purple Full Rim',       
+      price: 1100,                          
+      imageUrl: 'assets/images/product2.png', 
       rating: 4.8,
       isPowered: false,
-      category: 'Cat Eye',                  // OK
+      category: 'Cat Eye',                
     );
 
     return Scaffold(
@@ -42,7 +41,7 @@ class TrackOrderPage extends StatelessWidget {
             // Kartu produk
             GestureDetector(
               onTap: () {
-                // Navigasi ke halaman detail produk menggunakan route
+                
                 Navigator.pushNamed(
                   context,
                   '/product-detail',
@@ -74,7 +73,7 @@ class TrackOrderPage extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Gambar produk - Clickable dengan visual feedback
+                   
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
@@ -83,7 +82,7 @@ class TrackOrderPage extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.asset(
-                          product.imageUrl, // Ganti product.image → product.imageUrl
+                          product.imageUrl, 
                           width: 100,
                           height: 80,
                           fit: BoxFit.cover,
@@ -99,7 +98,7 @@ class TrackOrderPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            product.name, // Ganti product.title → product.name
+                            product.name,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -107,7 +106,7 @@ class TrackOrderPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            product.category, // OK
+                            product.category,
                             style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 13,
@@ -125,7 +124,7 @@ class TrackOrderPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            '\$${product.price}', // int → langsung tampil
+                            '\$${product.price}',
                             style: const TextStyle(
                               color: Colors.red,
                               fontWeight: FontWeight.bold,
@@ -142,7 +141,7 @@ class TrackOrderPage extends StatelessWidget {
                       children: [
                         const Icon(Icons.star, color: Colors.amber, size: 18),
                         Text(
-                          product.rating.toString(), // OK
+                          product.rating.toString(),
                           style: const TextStyle(fontSize: 12),
                         ),
                       ],

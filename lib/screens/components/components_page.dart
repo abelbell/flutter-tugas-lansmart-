@@ -1,10 +1,6 @@
 // lib/screens/components/components_page.dart
 import 'package:flutter/material.dart';
 
-// ========================================
-// TEMPLATE COMPONENT PAGE
-// ========================================
-
 class ComponentDetailPage extends StatelessWidget {
   final String title;
   
@@ -75,10 +71,6 @@ class ComponentDetailPage extends StatelessWidget {
   }
 }
 
-// ========================================
-// UI COMPONENTS PAGES
-// ========================================
-
 class AccordionPage extends StatelessWidget {
   const AccordionPage({Key? key}) : super(key: key);
   @override
@@ -138,10 +130,6 @@ class DropdownsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const ComponentDetailPage(title: 'Dropdowns');
 }
-
-// ========================================
-// UI FORMS PAGES
-// ========================================
 
 class UiFormsPage extends StatelessWidget {
   const UiFormsPage({Key? key}) : super(key: key);

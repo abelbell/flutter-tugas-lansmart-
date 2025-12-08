@@ -4,10 +4,6 @@ import '../../models/product.dart';
 import 'delivery_address_page.dart';
 import 'cart_page.dart';
 
-// HAPUS INI:
-// import '../widgets/badge_count.dart';
-
-// PINDAHKAN BadgeCount KE SINI
 class BadgeCount extends StatelessWidget {
   final int count;
   const BadgeCount({Key? key, required this.count}) : super(key: key);
@@ -116,7 +112,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
                   const SizedBox(height: 16),
 
-                  // 🔵 Detail Produk
+                  // Detail Produk
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
@@ -204,7 +200,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
           ),
 
-          // 🛒 Tombol Add to Cart
+          // Tombol Add to Cart
           Container(
             padding: const EdgeInsets.all(16),
             child: SizedBox(

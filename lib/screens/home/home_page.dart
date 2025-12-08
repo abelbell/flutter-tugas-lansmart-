@@ -43,7 +43,12 @@ class _HomePageState extends State<HomePage> {
             CategoryChips(
               categories: categories,
               selected: _selectedCategory,
-              onSelected: (cat) => setState(() => _selectedCategory = cat),
+              onSelected: (cat) {
+                // Update selected category locally
+                setState(() => _selectedCategory = cat);
+                // Navigate to Category screen; pass the selected category as argument
+                Navigator.pushNamed(context, '/category', arguments: {'category': cat});
+              },
             ),
             const SizedBox(height: 20),
             const ProductGrid(),

@@ -26,7 +26,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     const Color(0xFF2196F3),
     const Color(0xFF8B4513),
     const Color(0xFF757575),
-    const Color(0xFF9C27B0),
+    // removed purple per request
     const Color(0xFF4CAF50),
     const Color(0xFF66BB6A),
   ];
@@ -92,10 +92,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           children: [
             // Main Image
             Container(
-              height: 350,
+              height: 340,
               width: double.infinity,
-              color: const Color(0xFFF8F8F8),
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               alignment: Alignment.center,
               child: Image.asset(
                 _productImages[_selectedImageIndex],
@@ -105,38 +105,43 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
 
-            // Thumbnails
+            // Thumbnails (centered)
             Container(
-              height: 90,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ListView.builder(
+              height: 56,
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                itemCount: _productImages.length,
-                itemBuilder: (ctx, i) {
-                  final isSelected = i == _selectedImageIndex;
-                  return GestureDetector(
-                    onTap: () => setState(() => _selectedImageIndex = i),
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 12),
-                      width: 70,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF8F8F8),
-                        border: Border.all(
-                          color: isSelected ? Colors.orange : Colors.grey.shade300,
-                          width: isSelected ? 2 : 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(_productImages.length, (i) {
+                    final isSelected = i == _selectedImageIndex;
+                    return GestureDetector(
+                      onTap: () => setState(() => _selectedImageIndex = i),
+                      child: Container(
+                        margin: EdgeInsets.only(right: i == _productImages.length - 1 ? 0 : 10),
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: isSelected ? const Color(0xFFF4A261) : const Color(0xFFECECEC),
+                            width: isSelected ? 2 : 1,
+                          ),
+                          borderRadius: BorderRadius.circular(6),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 1)),
+                          ],
                         ),
-                        borderRadius: BorderRadius.circular(8),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: Image.asset(_productImages[i], fit: BoxFit.cover),
+                        ),
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(_productImages[i], fit: BoxFit.cover),
-                      ),
-                    ),
-                  );
-                },
+                    );
+                  }),
+                ),
               ),
             ),
 
@@ -309,34 +314,58 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       height: 1.5,
                     ),
                   ),
-                  const SizedBox(height: 100),
+                  const SizedBox(height: 80),
                 ],
               ),
             ),
           ],
         ),
       ),
-      bottomSheet: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)]),
-        child: ElevatedButton(
-          onPressed: () {
-            context.read<KeranjangProvider>().tambah();
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to cart!')));
-            Navigator.pushNamed(context, '/cart');
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFFDD096),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-            minimumSize: const Size.fromHeight(52),
-          ),
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.shopping_cart, color: Colors.black),
-              SizedBox(width: 8),
-              Text('Add To Cart', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-            ],
+      // Bottom action: safe area so the button won't be cut off by system UI
+      bottomSheet: SafeArea(
+        bottom: true,
+        child: SizedBox(
+          height: 84,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final double outerWidth = constraints.maxWidth; // full width white background
+              final double innerButtonWidth = outerWidth - 32; // button slightly smaller than white box
+              return Container(
+                width: outerWidth,
+                height: 64,
+                // White rectangular background (straight edges, no rounding)
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)],
+                ),
+                child: Center(
+                  child: SizedBox(
+                    width: innerButtonWidth,
+                    height: 56,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.read<KeranjangProvider>().tambah();
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to cart!')));
+                        Navigator.pushNamed(context, '/cart');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFFDD096),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+                        minimumSize: const Size.fromHeight(56),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.shopping_cart, color: Colors.black),
+                          SizedBox(width: 8),
+                          Text('Add To Cart', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),

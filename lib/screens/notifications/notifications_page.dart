@@ -1,3 +1,4 @@
+// lib/models/notification_page.dart
 import 'package:flutter/material.dart';
 
 class NotificationsPage extends StatefulWidget {
@@ -156,14 +157,22 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 return Dismissible(
                   key: Key('${title}_$index'),
                   direction: DismissDirection.endToStart,
-                  background: Container(
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    color: Colors.red,
-                    child: const Icon(
-                      Icons.delete_outline,
-                      color: Colors.white,
-                      size: 28,
+                  background: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(
+                          Icons.delete_outline,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                      ),
                     ),
                   ),
                   onDismissed: (direction) {

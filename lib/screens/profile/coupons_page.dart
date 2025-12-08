@@ -1,3 +1,4 @@
+// lib/models/coupons_page.dart
 import 'package:flutter/material.dart';
 
 class CouponsPage extends StatelessWidget {

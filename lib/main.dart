@@ -1,10 +1,12 @@
+import 'package:eyewear_shop/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 // Providers
 import 'providers/keranjang_provider.dart';
 import 'providers/theme_provider.dart';
-import 'screens/wishlist/wishlist_page.dart';
-import 'screens/cart/cart_page.dart';
+import 'providers/auth_provider.dart';  // ⬅️ WAJIB DITAMBAHKAN
 
 // Screens
 import 'screens/load/load_screen.dart';
@@ -22,13 +24,30 @@ import 'screens/profile/profile_page.dart';
 import 'screens/notifications/notifications_page.dart';
 import 'screens/product/product_detail_screen.dart';
 
+// 🔥 Firebase Config
+// const firebaseConfig = FirebaseOptions(
+//   apiKey: "ISI DARI FIREBASE",
+//   authDomain: "ISI DARI FIREBASE",
+//   projectId: "ISI DARI FIREBASE",
+//   storageBucket: "ISI DARI FIREBASE",
+//   messagingSenderId: "ISI DARI FIREBASE",
+//   appId: "ISI DARI FIREBASE",
+// );
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // ⬅️ INISIALISASI FIREBASE DARI firebase_options.dart
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => KeranjangProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: const MyApp(),
     ),
@@ -48,7 +67,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeProvider.lightTheme,
       darkTheme: ThemeProvider.darkTheme,
       themeMode: themeProvider.themeMode,
-      // halaman awal aplikasi
+
       home: const LoadScreen(),
       routes: {
         '/splash': (context) => const SplashScreen(),
@@ -65,7 +84,6 @@ class MyApp extends StatelessWidget {
         '/notifications': (context) => const NotificationsPage(),
       },
       onGenerateRoute: (settings) {
-        // Handle route untuk product detail dengan arguments
         if (settings.name == '/product-detail') {
           final args = settings.arguments as Map<String, dynamic>?;
           if (args != null) {

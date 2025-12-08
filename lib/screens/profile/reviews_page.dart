@@ -65,59 +65,45 @@ class _ReviewsPageState extends State<ReviewsPage> {
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: Colors.grey.shade300),
                   ),
-                  child: Column(
+                  // Compact layout: square image on the left and product info on the right
+                  child: Row(
                     children: [
-                      // Gambar Besar
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
                           widget.product!['image'] ?? 'assets/images/glasses.png',
-                          height: 200,
-                          width: double.infinity,
-                          fit: BoxFit.contain,
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      const SizedBox(height: 16),
-
-                      // Info Produk
-                      Row(
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.product!['name'],
+                              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                            ),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'FREE Delivery',
+                              style: TextStyle(color: Colors.green, fontSize: 12),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              '\$${widget.product!['price']}',
+                              style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Row(
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              widget.product!['image'] ?? 'assets/images/glasses.png',
-                              width: 60,
-                              height: 60,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.product!['name'],
-                                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-                                ),
-                                const Text(
-                                  'FREE Delivery',
-                                  style: TextStyle(color: Colors.green, fontSize: 12),
-                                ),
-                                Text(
-                                  '\$${widget.product!['price']}',
-                                  style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Row(
-                            children: [
-                              Icon(Icons.star, color: Colors.amber, size: 16),
-                              SizedBox(width: 4),
-                              Text('4.8', style: TextStyle(fontWeight: FontWeight.w600)),
-                            ],
-                          ),
+                          Icon(Icons.star, color: Colors.amber, size: 16),
+                          SizedBox(width: 4),
+                          Text('4.8', style: TextStyle(fontWeight: FontWeight.w600)),
                         ],
                       ),
                     ],
@@ -138,28 +124,37 @@ class _ReviewsPageState extends State<ReviewsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Overall Rating',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Your Average Rating is 4.0',
-                    style: TextStyle(color: Colors.grey, fontSize: 13),
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(5, (i) {
-                      return GestureDetector(
-                        onTap: () => setState(() => _currentRating = i + 1),
-                        child: Icon(
-                          i < _currentRating ? Icons.star : Icons.star_border,
-                          color: Colors.amber,
-                          size: 36,
+                  Center(
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Overall Rating',
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                         ),
-                      );
-                    }),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Your Average Rating Is 4.0',
+                          style: TextStyle(color: Colors.grey, fontSize: 13),
+                        ),
+                        const SizedBox(height: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(5, (i) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                              child: GestureDetector(
+                                onTap: () => setState(() => _currentRating = i + 1),
+                                child: Icon(
+                                  i < _currentRating ? Icons.star : Icons.star_border,
+                                  color: Colors.amber,
+                                  size: 40,
+                                ),
+                              ),
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 24),
 

@@ -1,10 +1,6 @@
 // lib/screens/chat/chat_list_page.dart
 import 'package:flutter/material.dart';
 
-// ========================================
-// CHAT DETAIL PAGE
-// ========================================
-
 class ChatDetailPage extends StatelessWidget {
   final String name;
   final String avatar;

@@ -18,7 +18,6 @@ class CreditCardModel {
     this.backgroundColor = const Color(0xFFFFC870),
   });
 
-  // Optional: untuk debugging atau copy
   CreditCardModel copyWith({
     String? cardNumber,
     String? cardHolder,

@@ -28,8 +28,8 @@ class ProductGrid extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
-          // Perkecil tinggi kartu agar tampilan konsisten dan lebih ringkas
-          childAspectRatio: 0.70,
+          // Sesuaikan rasio agar kotak kartu proporsional seperti wishlist
+          childAspectRatio: 0.80,
         ),
         itemCount: productImages.length,
         itemBuilder: (context, index) {

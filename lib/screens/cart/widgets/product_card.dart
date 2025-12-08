@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart';
+import '../../../models/product.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -29,7 +29,7 @@ class ProductCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                   child: Image.asset(
-                    product.image,
+                    product.imageUrl,
                     width: double.infinity,
                     height: 150,
                     fit: BoxFit.cover,

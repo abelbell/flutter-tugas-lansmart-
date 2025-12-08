@@ -1,5 +1,6 @@
+// lib/models/verify_code_screen.dart
 import 'package:flutter/material.dart';
-import 'reset_password_screen.dart'; // pastikan file ini ada dan benar namanya
+import 'reset_password_screen.dart';
 
 class VerifyCodeScreen extends StatefulWidget {
   const VerifyCodeScreen({super.key});

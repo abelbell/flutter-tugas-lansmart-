@@ -1,3 +1,4 @@
+// lib/models/app_drawer.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/theme_provider.dart';
@@ -23,30 +24,48 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          // HEADER
-          UserAccountsDrawerHeader(
-            accountName: Text(
-              'Roopa',
-              style: TextStyle(
-                fontFamily: 'TomatoGrotesk',
-                fontWeight: FontWeight.bold,
-                color: isDark ? Colors.white : Colors.black,
+          // HEADER (custom) - avatar on left, name/email on the right
+          Container(
+            color: isDark ? Colors.grey[850] : Colors.white,
+            padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+            child: SafeArea(
+              bottom: false,
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 28,
+                    backgroundImage: const AssetImage('assets/images/banner.png'),
+                    backgroundColor: isDark ? Colors.grey[800] : Colors.grey[200],
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Roopa',
+                          style: TextStyle(
+                            fontFamily: 'TomatoGrotesk',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: isDark ? Colors.white : Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'example@gmail.com',
+                          style: TextStyle(
+                            fontFamily: 'TomatoGrotesk',
+                            color: isDark ? Colors.white70 : Colors.black54,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-            accountEmail: Text(
-              'example@gmail.com',
-              style: TextStyle(
-                fontFamily: 'TomatoGrotesk',
-                color: isDark ? Colors.white70 : Colors.black54,
-              ),
-            ),
-            currentAccountPicture: const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/banner.png'),
-            ),
-            decoration: BoxDecoration(
-              color: isDark ? Colors.grey[850] : Colors.white,
-            ),
-            margin: EdgeInsets.zero,
           ),
 
           // MENU ITEMS

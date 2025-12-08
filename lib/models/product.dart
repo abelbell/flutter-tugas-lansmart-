@@ -1,12 +1,12 @@
 // lib/models/product.dart
 class Product {
   final String id;
-  final String name;        // Ganti title → name
+  final String name;
   final int price;
-  final String imageUrl;    // Ganti image → imageUrl
+  final String imageUrl;
   final double rating;
   final bool isPowered;
-  final String category;    // TAMBAH: untuk track_order_page
+  final String category;
 
   const Product({
     required this.id,

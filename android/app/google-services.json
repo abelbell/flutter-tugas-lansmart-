@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "213904310776",
+    "project_id": "mws-kel-8",
+    "storage_bucket": "mws-kel-8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213904310776:android:98a99f227146bf0570960d",
+        "android_client_info": {
+          "package_name": "com.example.lensamart_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1KCNjL1nhjW_PbIbaqDm1i9vLZ8hfZX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

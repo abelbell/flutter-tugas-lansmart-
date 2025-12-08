@@ -219,11 +219,29 @@ class _WishlistPageState extends State<WishlistPage> {
     );
   }
 
-  Widget _chip(String label) => LensChip(
-        label: label,
-        selected: selectedCategory == label,
-        onTap: () => setState(() => selectedCategory = label),
-      );
+  Widget _chip(String label) {
+    final isSelected = selectedCategory == label;
+    return GestureDetector(
+      onTap: () => setState(() => selectedCategory = label),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFFFFD794) : Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: isSelected ? const Color(0xFFFFD794) : Colors.grey.shade300),
+        ),
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontFamily: 'TomatoGrotesk',
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget _buildProductCard(Product product, int index) {
     return GestureDetector(

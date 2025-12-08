@@ -4,7 +4,7 @@ import '../../screens/wishlist/wishlist_page.dart';
 import '../../screens/cart/cart_page.dart';
 import '../../screens/profile/profile_page.dart';
 import '../../screens/category/category_screen.dart';
-import '../../screens/orders/orders_page.dart'; // Hapus / ganti jika file berbeda
+import '../../screens/orders/orders_page.dart';
 
 class CustomBottomNav extends StatelessWidget {
   final int currentIndex;
@@ -19,7 +19,6 @@ class CustomBottomNav extends StatelessWidget {
   }) : super(key: key);
 
   void _navigateToPage(BuildContext context, int index) {
-    // Jika sudah di halaman yang sama, jangan navigasi
     if (index == currentIndex) return;
 
     Widget page;
@@ -34,7 +33,7 @@ class CustomBottomNav extends StatelessWidget {
         page = const CartPage();
         break;
       case 3:
-        // Navigasikan Orders ke Category sesuai permintaan
+       
         page = const CategoryScreen();
         break;
       case 4:
@@ -44,7 +43,7 @@ class CustomBottomNav extends StatelessWidget {
         return;
     }
 
-    // Push replacement agar tidak menumpuk route stack
+    
     Navigator.pushReplacement(
       context,
       PageRouteBuilder(
